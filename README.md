@@ -21,7 +21,7 @@ Drag and drop the NotEnoughMadness.dll in there.
 
 You're done!
 
-Visual showcase:
+Visual showcase:<br/>
 ![Gif visually showing the written steps above.](./media/WdRYoFpdIP.gif)
 
 # Build
