@@ -21,7 +21,7 @@ namespace NotEnoughMadness
 
         // This is the string that will be used to display 
         // I use the wording "running on" rather than "for" because with bepinex you can run an older version of nem on a new mpn version that wasn't tested or updated for
-        public static readonly string Version = "NotEnoughMadness v" + _NEMVersion + "w/ M:PN " + Game_Manager.ReturnGameVersion();
+        public static readonly string Version = "NotEnoughMadness v" + _NEMVersion + " w/ M:PN " + Game_Manager.ReturnGameVersion();
 
         // Create config file
         private static ConfigFile config = new ConfigFile(Path.Combine(Paths.ConfigPath, "NotEnoughMadness.cfg"), true);

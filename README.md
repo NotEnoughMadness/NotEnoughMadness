@@ -12,4 +12,4 @@ normal user use.
 * Highly customizable
 
 # Build
-Before building you will have to set the reference dll paths. They are not provided with the project. Also you will need 🔥🔥🔥 BEPINEX 🔥🔥🔥 installed for M:PN.
+Before building you will have to set the reference dll paths. They are not provided with the project. Also you will need [🔥🔥🔥 BEPINEX 🔥🔥🔥](https://github.com/bepinex/bepinex/releases) installed for M:PN.
