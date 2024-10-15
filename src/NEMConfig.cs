@@ -33,6 +33,7 @@ namespace NotEnoughMadness
         public static ConfigEntry<bool> TeleportEnabled = config.Bind(core, "TeleportEnabled", true, "Do you want the teleport keybind to teleport you or do nothing? If true, teleports you to cursor, if false, it doesn't.");
         public static ConfigEntry<bool> TeleportEffectEnabled = config.Bind(core, "TeleportEffectEnabled", true, "If true, doesn't hide the particle effects when teleporting. It uses the character's statcard's teleport effect, and if that doesn't exist, it uses the default red 404 error teleport effect.");
         public static ConfigEntry<bool> DebugModeOn = config.Bind(core, "DebugModeOn", false, "If true, enables the game's debug mode. You probably want this off unless you know what you're doing. It enables hidden objects, doors, additional non-configurable dev keybinds, you can skip stages outside of the beta branch, etc. It can also aid you in creating and testing your custom maps, as you can make your own debug objects that show up only when this is on.");
+        public static ConfigEntry<bool> CodeExecutionModsOn = config.Bind(core, "CodeExecutionModsOn", false, "If true, NEM will load dll mods from your workshop and local M:PN mod folders. Off by default, due to the unsafe nature of this feature, but also without this some mods may not work correctly. Turn on at your own risk, use only mods you can trust, you don't know what mod authors hide in the code, but also this is a cool feature to mess around with.");
 
         const string cam = "Camera Settings";
         
