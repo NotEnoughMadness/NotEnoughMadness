@@ -19,24 +19,24 @@ namespace NotEnoughMadness
         // Edit this one for changing the number
         private const string _NEMVersion = "2.0";
 
-        // This is the string that will be used to display 
-        // I use the wording "running on" rather than "for" because with bepinex you can run an older version of nem on a new mpn version that wasn't tested or updated for
+        // This is the string that will be displayed in the corner
+        // I use the wording "w/" rather than "for" because with bepinex you can run an older version of nem on a new mpn version that wasn't tested or updated for
         public static readonly string Version = "NotEnoughMadness v" + _NEMVersion + " w/ M:PN " + Game_Manager.ReturnGameVersion();
 
         // Create config file
         private static ConfigFile config = new ConfigFile(Path.Combine(Paths.ConfigPath, "NotEnoughMadness.cfg"), true);
 
-        // Do you want the mod menu to exist???
         const string core = "CORE";
        
         public static ConfigEntry<bool> ModMenuEnabled = config.Bind(core, "ModMenuEnabled", true, "Do you want the mod menu to show up in game? You probably want this ON. If false, menu doesn't show up if you hold the keybind.");
         public static ConfigEntry<bool> TeleportEnabled = config.Bind(core, "TeleportEnabled", true, "Do you want the teleport keybind to teleport you or do nothing? If true, teleports you to cursor, if false, it doesn't.");
         public static ConfigEntry<bool> TeleportEffectEnabled = config.Bind(core, "TeleportEffectEnabled", true, "If true, doesn't hide the particle effects when teleporting. It uses the character's statcard's teleport effect, and if that doesn't exist, it uses the default red 404 error teleport effect.");
         public static ConfigEntry<bool> DebugModeOn = config.Bind(core, "DebugModeOn", false, "If true, enables the game's debug mode. You probably want this off unless you know what you're doing. It enables hidden objects, doors, additional non-configurable dev keybinds, you can skip stages outside of the beta branch, etc. It can also aid you in creating and testing your custom maps, as you can make your own debug objects that show up only when this is on.");
-        public static ConfigEntry<bool> CodeExecutionModsOn = config.Bind(core, "CodeExecutionModsOn", false, "If true, NEM will load dll mods from your workshop and local M:PN mod folders. Off by default, due to the unsafe nature of this feature, but also without this some mods may not work correctly. Turn on at your own risk, use only mods you can trust, you don't know what mod authors hide in the code, but also this is a cool feature to mess around with.");
+        public static ConfigEntry<bool> CodeExecutionModsOn = config.Bind(core, "CodeExecutionModsOn", false, "If true, NEM will load dll mods from your workshop and local M:PN mod folders. Off by default, due to the unsafe nature of this feature. Without this some mods may not work correctly, eg. a map with custom functionality. Turn on at your own risk, use only mods you can trust, you don't know what mod authors hide in the code, but also this is a cool feature to mess around with.");
 
         const string cam = "Camera Settings";
-        
+
+        public static ConfigEntry<bool> CameraToggleEnabled = config.Bind(cam, "CameraToggleEnabled", true, "If false, camera hotkeys won't work and you won't be able to change the camera type.");
         public static ConfigEntry<KeyCode> CameraToggle = config.Bind(cam, "CameraToggle", KeyCode.V, "Key code that toggles between available camera modes, circling back to vanilla.");
         public static ConfigEntry<float> CameraSensivity = config.Bind(cam, "CameraSensivity", 1f, "How sensitive are the custom camera types (not vanilla)");
         public static ConfigEntry<float> CameraSpeed = config.Bind(cam, "CameraSpeed", 20f, "How fast the custom camera types move (not vanilla). If you hold left shift or right shift the speed gets doubled.");

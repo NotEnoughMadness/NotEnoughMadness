@@ -1,4 +1,5 @@
 ﻿using FMODUnity;
+using NotEnoughMadness.Classes;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,44 +9,7 @@ using UnityEngine.Scripting;
 
 namespace NotEnoughMadness.MapMaking
 {
-    /*
-     * TODO for this entire project to somehow work with all the circular dependencies and stuff:
-     * 
-     * You have to manage all the components from one centralised place:
-     * 
-     *      Pre-create / pre-load all NEM components into the vanilla M:PN components 
-     *      Connect all those M:PN components to eachother where they need
-     *      Destroy NEM components at the end
-     *      
-     * NEM Components shouldnt do anything in their methods, they exist purely to __ HOLD DATA __
-     * 
-     * With the exception of this component, which WILL do all the above ^^^^^ to process all components in the scene
-     * In it's AWAKE method (first to be called when scene starts)
-     *
-     *
-     *  ALSO TODO:
-     *
-     * Get the mapmaking classes to compile in a separate DLL with no dependencies so unity CAN FUCK OFFF
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * THe plaaaan:
-     * Loop through root objects of scene
-     * for all children in all root objects of scene    
-     *      if child has component x
-     *          create vanilla mpn class on its gameobject
-     *          
-     *      //^^^ repeat that for all components 
-     *      fiajfiawjfiafjioajfojewif
-     */
-
-
-
-    // Make this one combine all the vanilla oness
-    partial class NEM_GameManager : MonoBehaviour
+    public class NEM_GameManager : MonoBehaviour
     {
         // // GAME MANAGER SETTINGS // //
         [Header("Game_Manager Settings")]
@@ -135,14 +99,26 @@ namespace NotEnoughMadness.MapMaking
 
         [Tooltip("Serial names of world objects in your scene")]
         public List<string> objectsBySerialNumber = new List<string>();*/
-
-        void Awake()
+        NEM_GameManager()
         {
+            MapManager.OnCreateMapComponents += CreateMapComponents;
+            MapManager.OnConnectMapComponents += ConnectMapComponents;
+        }
+
+        void ConnectMapComponents(object sender, EventArgs e)
+        {
+            Debug.Log("NEM: ConnectMapComponents called on NEM_GameManager " + gameObject.name);
+        }
+
+        void CreateMapComponents(object sender, EventArgs e)
+        {
+            Debug.Log("NEM: CreateMapComponents called on NEM_GameManager " + gameObject.name);
+            /*
             // // CREATION OF ALL REQUIRED COMPONENTS // //
 
             // unity classes
             // Input Module
-            
+
             StandaloneInputModule inputModule = gameObject.AddComponent<StandaloneInputModule>();
 
             inputModule.horizontalAxis = "Move Horizontal";
@@ -264,6 +240,7 @@ namespace NotEnoughMadness.MapMaking
 
             // "this" is the NEM_GameManager 
             Destroy(this);
+            */
         }
     }
 }

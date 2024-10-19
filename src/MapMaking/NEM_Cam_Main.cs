@@ -76,14 +76,14 @@ namespace NotEnoughMadness.MapMaking
             */
 
             // ok ok instead of recreating manually, ,,  ,  INSTANTIATE PREFAB that exists in vanilla
-            GameObject cameraGamePrefab = Instantiate(Resources.Load("cameras/Camera_Game")) as GameObject;
+            /*GameObject cameraGamePrefab = Instantiate(Resources.Load("cameras/Camera_Game")) as GameObject;
             cameraGamePrefab.transform.position = gameObject.transform.position;
             cameraGamePrefab.transform.rotation = gameObject.transform.rotation;
             cameraGamePrefab.transform.localScale = gameObject.transform.localScale;
 
 
             // COMMENCE SELF DESTRUCT SEQUENCE 
-            Destroy(gameObject);
+            Destroy(gameObject);*/
         }
     }
 

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace NotEnoughMadness.MapMaking
 {
-    public class NEM_DataAssigner : MonoBehaviour
+    public class NEM_DataAssigner : NEM_Static_Object
     {
         [Header("DataAssigner")]
 
@@ -16,7 +13,7 @@ namespace NotEnoughMadness.MapMaking
         public bool forceSpawnOutsideFocusRoom = false;
 
         [Tooltip("String name of your custom faction. Leave empty to use one of the default factions below. (it has to be present in MPN already, does not create new factions by itself.) \r\n\r\n***NOT YET IMPLEMENTED")]
-        public string customFaction;
+        public string customFaction = "";
 
         [Tooltip("This will be used if customFaction string is empty.")]
         public NEM_Factions defaultFaction = NEM_Factions.None;

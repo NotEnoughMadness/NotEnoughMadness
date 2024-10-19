@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using NotEnoughMadness.Classes;
+using System;
+using UnityEngine;
 
 namespace NotEnoughMadness.MapMaking
 {

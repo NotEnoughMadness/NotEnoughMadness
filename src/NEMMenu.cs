@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
+using NotEnoughMadness.Classes;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static UI_Inventory.InvTab;
 
 namespace NotEnoughMadness
@@ -14,7 +16,13 @@ namespace NotEnoughMadness
 
         void Start()
         {
+            if (currentNemMenu != null)
+            {
+                return;
+            }
+
             NEMMenu.currentNemMenu = this;
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         
         public static Dictionary<string, bool> toggleBools = new Dictionary<string, bool>()
@@ -282,54 +290,63 @@ namespace NotEnoughMadness
             ///
             if (Cam_Main.gameCam != null)
             {
-                if (Input.GetKeyDown(NEMConfig.CameraToggle.Value))
+                if (NEMConfig.CameraToggleEnabled.Value == true)
                 {
-                    cameraType += 1;
-                    CameraTypes camType = (CameraTypes)cameraType;
-
-                    GameObject mpnCamera = Cam_Main.gameCam.gameObject;
-                    Cam_Main mpnCamMain = mpnCamera.GetComponent<Cam_Main>();
-                    mpnCamMain.enabled = false;
-
-                    ClearCameraTypes();
-
-                    switch (camType)
+                    if (Input.GetKeyDown(NEMConfig.CameraToggle.Value))
                     {
+                        cameraType += 1;
+                        CameraTypes camType = (CameraTypes)cameraType;
 
-                        case CameraTypes.Free:
-                            {
-                                camComponents.Add("FreeCam", mpnCamera.AddComponent<NEMFreeCam>());
+                        GameObject mpnCamera = Cam_Main.gameCam.gameObject;
+                        Cam_Main mpnCamMain = mpnCamera.GetComponent<Cam_Main>();
+                        mpnCamMain.enabled = false;
 
-                                break;
-                            }
-                        case CameraTypes.Freeze:
-                            {
-                                camComponents.Add("FreezeCam", mpnCamera.AddComponent<NEMFreezeCam>());
+                        ClearCameraTypes();
 
-                                break;
-                            }
-                        case CameraTypes.Fps:
-                            {
-                                camComponents.Add("FpsCam", mpnCamera.AddComponent<NEMFpsCam>());
+                        switch (camType)
+                        {
 
-                                break;
-                            }
+                            case CameraTypes.Free:
+                                {
+                                    camComponents.Add("FreeCam", mpnCamera.AddComponent<NEMFreeCam>());
 
-                        // default is the vanilla camera type and clears all other types
-                        default:
-                            {
-                                Cursor.lockState = CursorLockMode.Confined;
-                                mpnCamMain.enabled = true;
+                                    break;
+                                }
+                            case CameraTypes.Freeze:
+                                {
+                                    camComponents.Add("FreezeCam", mpnCamera.AddComponent<NEMFreezeCam>());
 
-                                cameraType = 0;
-                                camType = CameraTypes.Vanilla;
-                                break;
-                            }
+                                    break;
+                                }
+                            case CameraTypes.Fps:
+                                {
+                                    camComponents.Add("FpsCam", mpnCamera.AddComponent<NEMFpsCam>());
+
+                                    break;
+                                }
+
+                            // default is the vanilla camera type and clears all other types
+                            default:
+                                {
+                                    Cursor.lockState = CursorLockMode.Confined;
+                                    mpnCamMain.enabled = true;
+
+                                    cameraType = 0;
+                                    camType = CameraTypes.Vanilla;
+                                    break;
+                                }
+                        }
+
+                        UI_Game.NewNotice("Chosen camera type: <color=yellow>" + GetCameraType().ToString() + "</color>");
                     }
-
-                    UI_Game.NewNotice("Chosen camera type: <color=yellow>" + GetCameraType().ToString() + "</color>");
                 }
             }
+        }
+
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            Debug.Log("NEM: Menu loaded scene \"" + scene.name + "\" with mode " + mode.ToString());
+            MapManager.ProcessMapComponents();
         }
     }
 }
