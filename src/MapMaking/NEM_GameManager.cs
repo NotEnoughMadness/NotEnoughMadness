@@ -9,6 +9,11 @@ using UnityEngine.Scripting;
 
 namespace NotEnoughMadness.MapMaking
 {
+
+    // https://docs.unity3d.com/ScriptReference/PropertyDrawer.html
+    // ^^ Something useful for making the unity inspector nicer for editing 
+    // something to do down the line maybe
+
     public class NEM_GameManager : MonoBehaviour
     {
         // // GAME MANAGER SETTINGS // //

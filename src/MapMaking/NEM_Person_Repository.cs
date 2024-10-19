@@ -6,6 +6,7 @@ namespace NotEnoughMadness.MapMaking
 {
     public class NEM_Person_Repository : NEM_UseableObject
     {
+        [Header("NEM_Person_Repository")]
         [Tooltip("Text that pops up when you try to enter.")]
         public string pressEnterText;
 

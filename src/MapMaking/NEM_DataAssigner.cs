@@ -26,11 +26,5 @@ namespace NotEnoughMadness.MapMaking
 
         [Tooltip("Only count down to spawn when this is true. Can be enabled by Event System.")]
         public bool spawnEnabled = true;
-
-        void Awake()
-        {
-            Debug.LogError("NEM: You attached a NEM_DataAssigner to a gameObject: " + gameObject.name + ".\r\nThat is INCORRECT. This class should not be used. It is here only to be inherited from by other, more specific assigners, like NEM_Char_DataAssigner. Use those instead.");
-            Destroy(this);
-        }
     }
 }

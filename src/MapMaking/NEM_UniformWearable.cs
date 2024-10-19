@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.AI;
 
 namespace NotEnoughMadness.MapMaking
 {
-    public class NEM_UniformWearable : MonoBehaviour
+    [Serializable]
+    public class NEM_UniformWearable
     {
         [Tooltip("List of StatCard_Armor names")]
-        public string[] armorList;
+        public string[] armorList = new string[0];
 
         [Tooltip("0 is the default material of the armor")]
         public int altMaterialIndex = 0;
@@ -15,12 +18,12 @@ namespace NotEnoughMadness.MapMaking
         public int altMeshIndex = 0;
 
         [Tooltip("Primary swatch color")]
-        public Color tint1Color;
+        public Color tint1Color = Color.black;
 
         [Tooltip("Secondary swatch color")]
-        public Color tint2Color;
+        public Color tint2Color = Color.black;
 
         [Tooltip("Tertiary/Glow/Glass swatch color")]
-        public Color glassColor;
+        public Color glassColor = Color.black;
     }
 }

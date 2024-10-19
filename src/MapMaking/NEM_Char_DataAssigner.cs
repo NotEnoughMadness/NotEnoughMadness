@@ -56,7 +56,7 @@ namespace NotEnoughMadness.MapMaking
         public string weaponThrown = "";
 
         [Tooltip("Statcard names of armor worn by the character.")]
-        public string[] armorWorn = new string[1];
+        public string[] armorWorn = new string[0];
 
         [Tooltip("Uniform is basically armor but you have more control over this stuff.")]
         public NEM_UniformWearable[] uniform = new NEM_UniformWearable[0];
