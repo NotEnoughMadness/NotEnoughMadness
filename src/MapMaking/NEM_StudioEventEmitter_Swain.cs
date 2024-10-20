@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FMOD.Studio;
+using FMODUnity;
+using NotEnoughMadness.Classes;
+using System;
 using UnityEngine;
 
 namespace NotEnoughMadness.MapMaking
@@ -44,6 +47,69 @@ namespace NotEnoughMadness.MapMaking
         public float fadeMeInScale = -1f;
 
         public NEM_PLAYBACK_STATE currentState = NEM_PLAYBACK_STATE.STOPPED;
+
+        NEM_StudioEventEmitter_Swain()
+        {
+            MapManager.OnCreateMapComponents += OnCreateMapComponents;
+            //MapManager.OnConnectMapComponents += OnConnectMapComponents;
+        }
+
+        void OnCreateMapComponents(object sender, EventArgs e)
+        {
+            StudioEventEmitter_Swain emitter = gameObject.AddComponent<StudioEventEmitter_Swain>();
+
+            emitter.Event = eventPath;
+
+            emitter.PlayEvent = (EmitterGameEvent)(int)playEvent;
+            emitter.StopEvent = (EmitterGameEvent)(int)stopEvent;
+
+            emitter.CollisionTag = collisionTag;
+
+            emitter.AllowFadeout = allowFadeOut;
+
+            emitter.TriggerOnce = triggerOnce;
+
+            emitter.Preload = preload;
+
+            ParamRef[] newParams = new ParamRef[paramRefs.Length];
+            for (int i = 0; i < paramRefs.Length; i++)
+            {
+                ParamRef newRef = new ParamRef();
+
+                newRef.Name = paramRefs[i].name;
+                newRef.Value = paramRefs[i].value;
+
+                newParams[i] = newRef;
+            }
+
+            emitter.Params = newParams;
+
+            emitter.OverrideAttenuation = overrideAttenuation;
+
+            emitter.mySoundType = (SwainAudio.AudioTypes)(int)mySoundType;
+
+            emitter.EarsRelativeToViewTarget = earsRelativeToViewTarget;
+
+            emitter.rangeMult = rangeMult;
+            emitter.volumeMult = volumeMult;
+
+            emitter.RestartSoundOnDisable = restartSoundOnDisable;
+            emitter.DestroyOnDisable = destroyOnDisable;
+
+            emitter.ForceLoop = forceLoop;
+
+            emitter.DisableOnStopped = disableOnStopped;
+
+            emitter.RandomizeStart = randomizeStart;
+
+            emitter.FadeMeInScale = fadeMeInScale;
+
+            emitter.CurrentState = (PLAYBACK_STATE)(int)currentState;
+        }
+        //void OnConnectMapComponents(object sender, EventArgs e)
+        //{
+
+        //}
     }
 
     [Serializable]

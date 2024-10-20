@@ -92,15 +92,22 @@ namespace NotEnoughMadness.MapMaking
         [Tooltip("What traits to remove from the character's default traits on spawn?")]
         public List<NEM_TraitList> removeTraits = new List<NEM_TraitList>();
 
+
+        
+
         NEM_Char_DataAssigner()
         {
-            MapManager.OnCreateMapComponents += CreateMapComponents;
-            MapManager.OnConnectMapComponents += ConnectMapComponents;
+            Debug.Log("NEM: NEM_Char_DataAssigner constructor called");
+
+            MapManager.OnCreateMapComponents += OnCreateMapComponents;
+            MapManager.OnConnectMapComponents += OnConnectMapComponents;
         }
 
-        void CreateMapComponents(object sender, EventArgs e)
+        void OnCreateMapComponents(object sender, EventArgs e)
         {
-            Debug.Log("NEM: CreateMapComponents called on " + this.name);
+            Debug.Log("NEM: NEM_Char_DataAssigner.CreateMapComponents called");
+            gameObject.SetActive(false);
+
             Char_DataAssigner assigner = gameObject.AddComponent<Char_DataAssigner>();
 
             assigner.RemoveTraits = new List<TraitList>();
@@ -233,7 +240,7 @@ namespace NotEnoughMadness.MapMaking
 
             
         }
-        void ConnectMapComponents(object sender, EventArgs e)
+        void OnConnectMapComponents(object sender, EventArgs e)
         {
             Debug.Log("NEM: ConnectMapComponents called on " + this.name);
             Char_DataAssigner assigner = gameObject.GetComponent<Char_DataAssigner>();
@@ -255,6 +262,8 @@ namespace NotEnoughMadness.MapMaking
 
             // SPAWN TO ENTRANCE
             assigner.SpawnToEntranceOrVehicle = spawnToEntranceOrVehicle.gameObject.GetComponent<Person_Repository>();
+
+            gameObject.SetActive(true);
         }
     }
 }

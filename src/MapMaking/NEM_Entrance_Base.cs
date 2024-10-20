@@ -65,7 +65,7 @@ namespace NotEnoughMadness.MapMaking
 
         List<Animator> accessLights = new List<Animator>();
 
-        public Dictionary<NEM_Entrance_Base, NEM_Entrance_Base.NEM_PathDeets> entrancePathRecords;
+        public Dictionary<NEM_Entrance_Base, NEM_Entrance_Base.NEM_PathDeets> entrancePathRecords = new Dictionary<NEM_Entrance_Base, NEM_Entrance_Base.NEM_PathDeets>();
 
         public NEM_Entrance_Base.NEM_ExitSpeed userExitSpeed = NEM_Entrance_Base.NEM_ExitSpeed.Walk;
 
@@ -84,17 +84,23 @@ namespace NotEnoughMadness.MapMaking
         // my seen entrances distance log
 
 
-
+        
 
 
         NEM_Entrance_Base()
         {
+            Debug.Log("NEM: NEM_Entrance_Base constructor called");
+            
+
             MapManager.OnCreateMapComponents += CreateMapComponents;
             MapManager.OnConnectMapComponents += ConnectMapComponents;
         }
 
         void CreateMapComponents(object sender, EventArgs e)
         {
+            Debug.Log("NEM: NEM_Entrance_Base.CreateMapComponents called");
+            gameObject.SetActive(false);
+
             Entrance_Base entrance = gameObject.AddComponent<Entrance_Base>();
 
             entrance.AccessLights = accessLights;
@@ -117,15 +123,25 @@ namespace NotEnoughMadness.MapMaking
             entrance.userExitSpeed = (Entrance_Base.ExitSpeed)(int)userExitSpeed;
 
             entrance.useSpeedMult = useSpeedMult;
+
+            entrance.OutboundCharacters = new List<Combatant_Base>();
         }
         void ConnectMapComponents(object sender, EventArgs e)
         {
             // entrance path records
             // the entrancebase s already need to be created
 
+            Debug.Log("NEM: NEM_Entrance_Base.ConnectMapComponents called");
             Entrance_Base entrance = gameObject.GetComponent<Entrance_Base>();
 
+            if (entrance == null)
+            {
+                Debug.LogError("NEM: Entrance_Base in NEM_Entrance_Base.ConnectMapComponents is null!");
+                return;
+            }
+
             Dictionary<Entrance_Base, Entrance_Base.PathDeets> newPathRecords = new Dictionary<Entrance_Base, Entrance_Base.PathDeets>();
+
             foreach(NEM_Entrance_Base key in entrancePathRecords.Keys)
             {
                 Entrance_Base newEntrance = key.gameObject.GetComponent<Entrance_Base>();
@@ -143,7 +159,16 @@ namespace NotEnoughMadness.MapMaking
 
             entrance.entrancePathRecords = newPathRecords;
 
-            entrance.myLinkedEntrance = myLinkedEntrance.gameObject.GetComponent<Entrance_Base>();
+            Entrance_Base foundEntrance = myLinkedEntrance.gameObject.GetComponent<Entrance_Base>();
+            if (foundEntrance == null)
+            {
+                Debug.LogError("NEM: NEM_Entrance_Base foundEntrance is null");
+                return;
+            }
+
+            entrance.myLinkedEntrance = foundEntrance;
+
+            gameObject.SetActive(true);
         }
 
 
@@ -164,6 +189,7 @@ namespace NotEnoughMadness.MapMaking
             Sprint
         }
 
+        [Serializable]
         public struct NEM_PathDeets
         {
             public float distanceValue;
