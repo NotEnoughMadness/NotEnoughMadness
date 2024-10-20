@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
 using NotEnoughMadness.Classes;
+using NotEnoughMadness.MapMaking;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static UI_Inventory.InvTab;
@@ -346,6 +347,48 @@ namespace NotEnoughMadness
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             Debug.Log("NEM: Menu loaded scene \"" + scene.name + "\" with mode " + mode.ToString());
+
+            Debug.Log("NEM: Subscribing events");
+
+            // TODO:
+            // loop through all components here
+            // subscribe them to the events from here depending on what type they are
+            // this is to establish an ORDER OF EXECUTIONNNNNNNN
+            // otherwise everything will fall apart! it already did in fact!!! graaaaagrhghhgrhrrhg 
+
+            foreach(var emitter in FindObjectsOfType<NEM_StudioEventEmitter_Swain>())
+            {
+                MapManager.OnCreateMapComponents += emitter.OnCreateMapComponents;
+                MapManager.OnConnectMapComponents += emitter.OnConnectMapComponents;
+            }
+
+            foreach(var entrance in FindObjectsOfType<NEM_Entrance_Base>())
+            {
+                MapManager.OnCreateMapComponents += entrance.OnCreateMapComponents;
+                MapManager.OnConnectMapComponents += entrance.OnConnectMapComponents;
+            }
+
+            foreach (var assigner in FindObjectsOfType<NEM_Char_DataAssigner>())
+            {
+                MapManager.OnCreateMapComponents += assigner.OnCreateMapComponents;
+                MapManager.OnConnectMapComponents += assigner.OnConnectMapComponents;
+            }
+
+            foreach (var room in FindObjectsOfType<NEM_Room_Main>())
+            {
+                MapManager.OnCreateMapComponents += room.OnCreateMapComponents;
+                MapManager.OnConnectMapComponents += room.OnConnectMapComponents;
+            }
+
+            foreach(var gameManager in FindObjectsOfType<NEM_GameManager>())
+            {
+                MapManager.OnCreateMapComponents += gameManager.OnCreateMapComponents;
+                MapManager.OnConnectMapComponents += gameManager.OnConnectMapComponents;
+            }
+
+            // todo main camera stuff
+
+
             MapManager.ProcessMapComponents();
         }
     }

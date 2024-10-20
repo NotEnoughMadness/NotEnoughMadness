@@ -106,19 +106,19 @@ namespace NotEnoughMadness.MapMaking
         public List<string> objectsBySerialNumber = new List<string>();*/
         NEM_GameManager()
         {
-            MapManager.OnCreateMapComponents += CreateMapComponents;
-            MapManager.OnConnectMapComponents += ConnectMapComponents;
+            Debug.Log("NEM: NEM_GameManager constructor called");
+
+            //MapManager.OnCreateMapComponents += CreateMapComponents;
+            //MapManager.OnConnectMapComponents += ConnectMapComponents;
         }
 
-        void ConnectMapComponents(object sender, EventArgs e)
-        {
-            Debug.Log("NEM: ConnectMapComponents called on NEM_GameManager " + gameObject.name);
-        }
+        
 
-        void CreateMapComponents(object sender, EventArgs e)
+        public void OnCreateMapComponents(object sender, EventArgs e)
         {
             Debug.Log("NEM: CreateMapComponents called on NEM_GameManager " + gameObject.name);
-            /*
+            gameObject.SetActive(false);
+            
             // // CREATION OF ALL REQUIRED COMPONENTS // //
 
             // unity classes
@@ -244,8 +244,15 @@ namespace NotEnoughMadness.MapMaking
             // // COMMENCE THE SELF DESTRUCT SEQUENCE // //
 
             // "this" is the NEM_GameManager 
-            Destroy(this);
-            */
+            //Destroy(this);
+            
+        }
+
+        public void OnConnectMapComponents(object sender, EventArgs e)
+        {
+            Debug.Log("NEM: ConnectMapComponents called on NEM_GameManager " + gameObject.name);
+
+            gameObject.SetActive(true);
         }
     }
 }

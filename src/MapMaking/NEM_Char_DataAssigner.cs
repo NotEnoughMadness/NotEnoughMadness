@@ -1,5 +1,4 @@
-﻿using NotEnoughMadness.Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -99,11 +98,11 @@ namespace NotEnoughMadness.MapMaking
         {
             Debug.Log("NEM: NEM_Char_DataAssigner constructor called");
 
-            MapManager.OnCreateMapComponents += OnCreateMapComponents;
-            MapManager.OnConnectMapComponents += OnConnectMapComponents;
+            //MapManager.OnCreateMapComponents += OnCreateMapComponents;
+            //MapManager.OnConnectMapComponents += OnConnectMapComponents;
         }
 
-        void OnCreateMapComponents(object sender, EventArgs e)
+        public void OnCreateMapComponents(object sender, EventArgs e)
         {
             Debug.Log("NEM: NEM_Char_DataAssigner.CreateMapComponents called");
             gameObject.SetActive(false);
@@ -240,7 +239,7 @@ namespace NotEnoughMadness.MapMaking
 
             
         }
-        void OnConnectMapComponents(object sender, EventArgs e)
+        public void OnConnectMapComponents(object sender, EventArgs e)
         {
             Debug.Log("NEM: ConnectMapComponents called on " + this.name);
             Char_DataAssigner assigner = gameObject.GetComponent<Char_DataAssigner>();

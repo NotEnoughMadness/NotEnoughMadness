@@ -92,11 +92,11 @@ namespace NotEnoughMadness.MapMaking
             Debug.Log("NEM: NEM_Entrance_Base constructor called");
             
 
-            MapManager.OnCreateMapComponents += CreateMapComponents;
-            MapManager.OnConnectMapComponents += ConnectMapComponents;
+            //MapManager.OnCreateMapComponents += OnCreateMapComponents;
+            //MapManager.OnConnectMapComponents += OnConnectMapComponents;
         }
 
-        void CreateMapComponents(object sender, EventArgs e)
+        public void OnCreateMapComponents(object sender, EventArgs e)
         {
             Debug.Log("NEM: NEM_Entrance_Base.CreateMapComponents called");
             gameObject.SetActive(false);
@@ -125,8 +125,13 @@ namespace NotEnoughMadness.MapMaking
             entrance.useSpeedMult = useSpeedMult;
 
             entrance.OutboundCharacters = new List<Combatant_Base>();
+
+            entrance.ExitPoints = exitPoints;
+            entrance.SpawnPoints = spawnPoints;
+
+            //todo check for stuff you missed and didnt set here
         }
-        void ConnectMapComponents(object sender, EventArgs e)
+        public void OnConnectMapComponents(object sender, EventArgs e)
         {
             // entrance path records
             // the entrancebase s already need to be created

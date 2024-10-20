@@ -147,11 +147,11 @@ namespace NotEnoughMadness.MapMaking
             Debug.Log("NEM: NEM_Room_Main constructor called");
 
 
-            MapManager.OnCreateMapComponents += OnCreateMapComponents;
-            MapManager.OnConnectMapComponents += OnConnectMapComponents;
+            //MapManager.OnCreateMapComponents += OnCreateMapComponents;
+            //MapManager.OnConnectMapComponents += OnConnectMapComponents;
         }
 
-        void OnCreateMapComponents(object sender, EventArgs e)
+        public void OnCreateMapComponents(object sender, EventArgs e)
         {
             Debug.Log("NEM: NEM_Room_Main.OnCreateMapComponents called");
             gameObject.SetActive(false);
@@ -226,7 +226,7 @@ namespace NotEnoughMadness.MapMaking
             room.myVehicles = new List<Vehicle_Base>();
             room.myEntrances = new List<Entrance_Base>();
         }
-        void OnConnectMapComponents(object sender, EventArgs e)
+        public void OnConnectMapComponents(object sender, EventArgs e)
         {
             Debug.Log("NEM: NEM_Room_Main.OnConnectMapComponents called");
             Room_Main room = gameObject.GetComponent<Room_Main>();

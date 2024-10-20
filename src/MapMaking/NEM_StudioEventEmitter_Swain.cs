@@ -50,11 +50,11 @@ namespace NotEnoughMadness.MapMaking
 
         NEM_StudioEventEmitter_Swain()
         {
-            MapManager.OnCreateMapComponents += OnCreateMapComponents;
+            //MapManager.OnCreateMapComponents += OnCreateMapComponents;
             //MapManager.OnConnectMapComponents += OnConnectMapComponents;
         }
 
-        void OnCreateMapComponents(object sender, EventArgs e)
+        public void OnCreateMapComponents(object sender, EventArgs e)
         {
             StudioEventEmitter_Swain emitter = gameObject.AddComponent<StudioEventEmitter_Swain>();
 
@@ -106,10 +106,10 @@ namespace NotEnoughMadness.MapMaking
 
             emitter.CurrentState = (PLAYBACK_STATE)(int)currentState;
         }
-        //void OnConnectMapComponents(object sender, EventArgs e)
-        //{
+        public void OnConnectMapComponents(object sender, EventArgs e)
+        {
 
-        //}
+        }
     }
 
     [Serializable]
